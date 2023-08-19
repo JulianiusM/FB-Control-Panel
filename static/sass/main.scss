@@ -1,0 +1,22 @@
+@import "../../node_modules/bootstrap/scss/functions";
+@import "../../node_modules/bootstrap/scss/variables";
+@import "../../node_modules/bootstrap/scss/mixins";
+
+@import "../css/module_bootstrap_override.css";
+@import "../css/module_svg_override.css";
+
+.progbar-text-dyn {
+    font-size: 6.0vw;
+}
+
+@include media-breakpoint-up(sm) {
+    .progbar-text-dyn {
+        font-size: 3.5vw;
+    }
+}
+
+@include media-breakpoint-up(md) {
+    .progbar-text-dyn {
+        font-size: 2.0vw;
+    }
+}

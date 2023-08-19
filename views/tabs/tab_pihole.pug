@@ -1,0 +1,57 @@
+if(data && data.pihole)
+    div(class="tab-pane fade", id="pi-hole", role="tabpanel")
+        div(class="row mx-0")
+            div(class="col-sm card px-0 mr-sm-1 mb-1 bg-success text-white text-center", id="total_queries", title="only A + AAAA queries (149,713 in total)")
+                p(class="card-header") Total queries (
+                    span(id="unique_clients") 61
+                    | clients)
+                div(class="card-body")
+                    h1
+                        span(id="dns_queries_today") 149,713
+            
+            div(class="col-sm card px-0 ml-sm-1 mr-md-1 mb-1 bg-info text-white text-center")
+                p(class="card-header") Queries Blocked
+                div(class="card-body")
+                    h1
+                        span(id="queries_blocked_today") 74,994
+                        
+            div(class="w-100 d-none d-sm-block d-md-none")
+                
+            div(class="col-sm card px-0 ml-md-1 mr-sm-1 mb-1 bg-warning text-white text-center")
+                p(class="card-header") Percent Blocked
+                div(class="card-body")
+                    h1
+                        span(id="percentage_blocked_today") 50.1%
+
+            div(class="col-sm card px-0 ml-sm-1 mb-1 bg-danger text-white text-center", title="Blocking list updated 14:18 (hh:mm) ago")
+                p(class="card-header") Domains on Blocklist
+                div(class="card-body")
+                    h1
+                        span(id="domains_being_blocked") 626,389
+                            
+        div(class="row mx-0 mt-1 mb-1")
+            div(class="col card px-0 bg-dark text-white text-center box", id="queries-over-time")
+                p(class="card-header") Total queries over last 24 hours
+                div(class="card-body")
+                    div(class="chart, chartjs-render-monitor", style="height: 180px")
+                        canvas(id="queryOverTimeChart", class="chartjs-render-monitor")
+                div(class="overlay", style="display: none;")
+                    svg(class="svg-inline--fa fa-sync fa-w-16 fa-spin", aria-hidden="true", focusable="false", data-prefix="fa", data-icon="sync", role="img", xmlns="http://www.w3.org/2000/svg", viewBox="0 0 512 512", data-fa-i2svg="")
+                        path(fill="currentColor", d="M440.65 12.57l4 82.77A247.16 247.16 0 0 0 255.83 8C134.73 8 33.91 94.92 12.29 209.82A12 12 0 0 0 24.09 224h49.05a12 12 0 0 0 11.67-9.26 175.91 175.91 0 0 1 317-56.94l-101.46-4.86a12 12 0 0 0-12.57 12v47.41a12 12 0 0 0 12 12H500a12 12 0 0 0 12-12V12a12 12 0 0 0-12-12h-47.37a12 12 0 0 0-11.98 12.57zM255.83 432a175.61 175.61 0 0 1-146-77.8l101.8 4.87a12 12 0 0 0 12.57-12v-47.4a12 12 0 0 0-12-12H12a12 12 0 0 0-12 12V500a12 12 0 0 0 12 12h47.35a12 12 0 0 0 12-12.6l-4.15-82.57A247.17 247.17 0 0 0 255.83 504c121.11 0 221.93-86.92 243.55-201.82a12 12 0 0 0-11.8-14.18h-49.05a12 12 0 0 0-11.67 9.26A175.86 175.86 0 0 1 255.83 432z")
+                                
+        div(class="row mx-0 mt-1 mb-1")
+            div(class="col-sm card px-0 mr-sm-1 mb-1 bg-dark text-white box", id="query-types-pie")
+                p(class="card-header") Query Types
+                div(class="card-body")
+                        canvas(id="queryTypePieChart", class="chartjs-render-monitor")
+                div(class="overlay", style="display: none;")
+                    svg(class="svg-inline--fa fa-sync fa-w-16 fa-spin", aria-hidden="true", focusable="false", data-prefix="fa", data-icon="sync", role="img", xmlns="http://www.w3.org/2000/svg", viewBox="0 0 512 512", data-fa-i2svg="")
+                        path(fill="currentColor", d="M440.65 12.57l4 82.77A247.16 247.16 0 0 0 255.83 8C134.73 8 33.91 94.92 12.29 209.82A12 12 0 0 0 24.09 224h49.05a12 12 0 0 0 11.67-9.26 175.91 175.91 0 0 1 317-56.94l-101.46-4.86a12 12 0 0 0-12.57 12v47.41a12 12 0 0 0 12 12H500a12 12 0 0 0 12-12V12a12 12 0 0 0-12-12h-47.37a12 12 0 0 0-11.98 12.57zM255.83 432a175.61 175.61 0 0 1-146-77.8l101.8 4.87a12 12 0 0 0 12.57-12v-47.4a12 12 0 0 0-12-12H12a12 12 0 0 0-12 12V500a12 12 0 0 0 12 12h47.35a12 12 0 0 0 12-12.6l-4.15-82.57A247.17 247.17 0 0 0 255.83 504c121.11 0 221.93-86.92 243.55-201.82a12 12 0 0 0-11.8-14.18h-49.05a12 12 0 0 0-11.67 9.26A175.86 175.86 0 0 1 255.83 432z")
+                    
+            div(class="col-sm card px-0 ml-sm-1 mb-1 bg-dark text-white box", id="forward-destinations-pie")
+                p(class="card-header") Queries answered by
+                div(class="card-body")
+                    canvas(id="forwardDestinationPieChart", class="chartjs-render-monitor")
+                div(class="overlay", style="display: none;")
+                    svg(class="svg-inline--fa fa-sync fa-w-16 fa-spin", aria-hidden="true", focusable="false", data-prefix="fa", data-icon="sync", role="img", xmlns="http://www.w3.org/2000/svg", viewBox="0 0 512 512", data-fa-i2svg="")
+                        path(fill="currentColor", d="M440.65 12.57l4 82.77A247.16 247.16 0 0 0 255.83 8C134.73 8 33.91 94.92 12.29 209.82A12 12 0 0 0 24.09 224h49.05a12 12 0 0 0 11.67-9.26 175.91 175.91 0 0 1 317-56.94l-101.46-4.86a12 12 0 0 0-12.57 12v47.41a12 12 0 0 0 12 12H500a12 12 0 0 0 12-12V12a12 12 0 0 0-12-12h-47.37a12 12 0 0 0-11.98 12.57zM255.83 432a175.61 175.61 0 0 1-146-77.8l101.8 4.87a12 12 0 0 0 12.57-12v-47.4a12 12 0 0 0-12-12H12a12 12 0 0 0-12 12V500a12 12 0 0 0 12 12h47.35a12 12 0 0 0 12-12.6l-4.15-82.57A247.17 247.17 0 0 0 255.83 504c121.11 0 221.93-86.92 243.55-201.82a12 12 0 0 0-11.8-14.18h-49.05a12 12 0 0 0-11.67 9.26A175.86 175.86 0 0 1 255.83 432z")

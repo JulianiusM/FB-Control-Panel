@@ -1,0 +1,13 @@
+if(data && data.fritzbox)
+    div(class="tab-pane fade", id="phone", role="tabpanel")
+        div(class="card my-1 px-0 bg-dark text-white box d-none" id="activeCallRoot")
+            h1(class="card-header text-center") Active calls
+            div(class="card-body")
+                //- Ajax result list placeholder
+                ul(class="list-group" id="activeCalllist")
+                        
+        div(class="card my-1 px-0 bg-dark text-white box")
+            h1(class="card-header text-center") Call list
+            div(class="card-body")
+                //- Ajax result list placeholder
+                ul(class="list-group" id="calllist")

@@ -1,0 +1,34 @@
+extend layout.pug
+
+block meta
+    title Profile of #{data.user.username} | Books
+    
+block scripts
+    //Include script for client side password validataion
+    script(type="text/javascript", src="/js/verify_profile.js")
+    
+block title
+    h1(class="card-header text-center") #{data.user.username}
+    
+block content
+    include modules/module_alert.pug
+    
+    //Register form
+    form(action="/profile", method="post", id="form")
+        div(class="form-group")
+            label(for="password") Current password
+            input(type="password", class="form-control bg-light", id="oldPassword", name="oldPassword", required)
+        div(class="form-group")
+            label(for="newPassword") New password
+            input(type="password", class="form-control bg-light", id="newPassword", name="newPassword", required)
+            div(id="password-info")
+            label(for="newPasswordRepeat") Repeat new password
+            input(type="password", class="form-control bg-light" id="newPasswordRepeat", name="newPasswordRepeat", required)
+            div(id="passwordRepeat-info", class="invalid-feedback invisible") Passwords do not match!
+        button(type="submit", class="btn btn-primary", name="request", value="changePassword") Change password
+        
+    hr
+        
+    form(action="/profile", method="post", id="deleteForm")
+        div(class="form-group")
+            button(type="submit", class="btn btn-danger", name="request", value="delete") Delete account

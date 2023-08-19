@@ -1,0 +1,39 @@
+extends layout.pug
+
+block meta
+    title ControlPanel
+    
+block scripts
+    script(type="text/javascript").
+        var config = {};
+        config.pihole = #{data.pihole};
+        config.fritzbox = #{data.fritzbox};
+    if(data && data.pihole)
+        script(type="text/javascript", src="/js/pihole_ui.js")
+    if(data && data.fritzbox)
+        script(type="text/javascript", src="/js/online_monitor.js")
+        script(type="text/javascript", src="/js/wlan_module.js")
+    script(type="text/javascript", src="/js/index.js")
+    
+block body
+    
+    //- Ajax result list placeholder
+    ul(class="list-group mt-1 d-none" id="activeCallAlerts")
+        li(class="list-group-item list-group-item-dark text-center bg-dark text-white")
+            h2 Active Calls
+    
+    ul(class="nav nav-tabs mt-1 bg-dark border-dark text-white rounded", role="tablist")
+        li(class="nav-item")
+            a(class="nav-link active", id="internet-data-tab-nav", data-toggle="tab", href="#internet", role="tab") Internet
+        li(class="nav-item")
+            a(class="nav-link", id="pi-hole-data-tab-nav", data-toggle="tab", href="#pi-hole", role="tab") Pi-hole
+        li(class="nav-item")
+            a(class="nav-link", id="phone-data-tab-nav", data-toggle="tab", href="#phone", role="tab") Phone
+        li(class="nav-item")
+            a(class="nav-link", id="wlan-data-tab-nav", data-toggle="tab", href="#wlan", role="tab") WLAN
+            
+    div(class="tab-content mt-1", id="tab-contents")
+        include tabs/tab_internet.pug
+        include tabs/tab_pihole.pug
+        include tabs/tab_phone.pug
+        include tabs/tab_wlan.pug

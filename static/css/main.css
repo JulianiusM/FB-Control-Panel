@@ -1,0 +1,18 @@
+@import "../css/module_bootstrap_override.css";
+@import "../css/module_svg_override.css";
+.progbar-text-dyn {
+  font-size: 6vw;
+}
+
+@media (min-width: 576px) {
+  .progbar-text-dyn {
+    font-size: 3.5vw;
+  }
+}
+@media (min-width: 768px) {
+  .progbar-text-dyn {
+    font-size: 2vw;
+  }
+}
+
+/*# sourceMappingURL=main.css.map */

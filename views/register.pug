@@ -1,0 +1,28 @@
+extend layout.pug
+
+block meta
+    title Register | Books
+    
+block scripts
+    //Include script for client side password validataion
+    script(type="text/javascript", src="/js/verify_password.js")
+    
+block title
+    h1(class="card-header text-center") Register
+    
+block content
+    include modules/module_alert.pug
+    
+    //Register form
+    form(action="/register", method="post", id="form")
+        div(class="form-group")
+            label(for="username") Username
+            input(type="text", class="form-control bg-light", id="username", name="username", value=(data&&data.username)?data.username:"", required)
+        div(class="form-group")
+            label(for="password") Password
+            input(type="password", class="form-control bg-light", id="password", name="password", required)
+            div(id="password-info")
+            label(for="password_repeat") Repeat password
+            input(type="password", class="form-control bg-light" id="password_repeat", name="password_repeat", required)
+            div(id="password_repeat-info", class="invalid-feedback invisible") Passwords do not match!
+        button(type="submit", class="btn btn-primary") Register
