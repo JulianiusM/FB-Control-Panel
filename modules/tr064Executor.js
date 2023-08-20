@@ -19,7 +19,9 @@ module.exports = class TR064Executor {
 			protocol: this.settings.getFritzboxProtocol(),
 		};
 
-		this.initializeFritzbox();
+		if (this.settings.isFritzbox()) {
+			this.initializeFritzbox();
+		}
 	}
 
 	initializeFritzbox() {
@@ -81,6 +83,11 @@ module.exports = class TR064Executor {
 	}
 
 	getCallList(success, failed) {
+		if (this.fritzSec == undefined) {
+			failed();
+			return;
+		}
+
 		let self = this;
 
 		(async () => {
@@ -94,6 +101,10 @@ module.exports = class TR064Executor {
 	}
 
 	getCallMonitor() {
+		if (this.fritzSec == undefined) {
+			return undefined;
+		}
+
 		let callMonitor = new fritz.CallMonitor(this.fritzOptions);
 		return callMonitor;
 	}
@@ -130,7 +141,12 @@ module.exports = class TR064Executor {
 		);
 	}
 
-	getAllWlanInfo(success) {
+	getAllWlanInfo(success, failed) {
+		if (this.fritzSec == undefined) {
+			failed();
+			return;
+		}
+
 		let self = this;
 		let wlanData = [];
 		let finished = 0;

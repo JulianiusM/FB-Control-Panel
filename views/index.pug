@@ -8,6 +8,7 @@ block scripts
         var config = {};
         config.pihole = #{data.pihole};
         config.fritzbox = #{data.fritzbox};
+        config.callMonPort = #{data.callMonPort};
     if(data && data.pihole)
         script(type="text/javascript", src="/js/pihole_ui.js")
     if(data && data.fritzbox)

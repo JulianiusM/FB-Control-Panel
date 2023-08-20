@@ -163,7 +163,7 @@ module.exports = class API {
 	phoneActiveCall(req, res) {
 		let self = this;
 
-		this.renderer.respondithJson(
+		this.renderer.respondWithJson(
 			res,
 			this.callMonitorSocket.getActiveCalls()
 		);

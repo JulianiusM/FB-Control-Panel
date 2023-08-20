@@ -13,12 +13,15 @@ let clientsRef = require("./modules/clients.js");
 let apiRef = require("./modules/api.js");
 let settingsRef = require("./modules/settings.js");
 
-//Start the app
-main();
+//Import route modules
+let apiRoute = require("./routes/api.js");
 
+//Top level variables
+let settings = new settingsRef();
+
+//Start the app
 async function main() {
 	//Load settings
-	let settings = new settingsRef();
 	await settings.readSettingsFile();
 
 	//Initialize mysql client
@@ -36,9 +39,9 @@ async function main() {
 	});*/
 
 	//Initialize custom modules
-	let clients = new clientsRef(dbClient, bcrypt, renderer, settings);
-	let auth = new authRef(clients);
-	let api = new apiRef(clients);
+	var clients = new clientsRef(dbClient, bcrypt, renderer, settings);
+	var auth = new authRef(clients);
+	var api = new apiRef(clients);
 
 	//Initialize body parser for post routes
 	let urlencodedParser = bodyParser.urlencoded({
@@ -64,8 +67,6 @@ async function main() {
 	app.set("views", "views");
 	app.set("view engine", "pug");
 
-	/*-----------[BEGINN>ROUTES]----------*/
-
 	/*-----------[INDEX]----------*/
 
 	//Index route
@@ -74,6 +75,7 @@ async function main() {
 			navUser: req.session.user,
 			pihole: settings.isPihole(),
 			fritzbox: settings.isFritzbox(),
+			callMonPort: settings.getCallMonitorPort(),
 		});
 	});
 
@@ -110,70 +112,14 @@ async function main() {
 		auth.processProfileSubmit.bind(auth)
 	);
 
-	/*-----------[BEGIN>API]----------*/
+	//Load api routes
+	app.use("/api", apiRoute.createRoutes(api));
 
-	//stub for api root
-	app.get("/api", api.rootCall.bind(api));
-
-	/*-----------[QUERY]----------*/
-
-	//stub for queries api
-	app.get("/api/queries", api.queryRootCall.bind(api));
-
-	//Get dns queries in 10 min intervals api
-	app.get("/api/queries/10mins", api.query10MinCall.bind(api));
-
-	//Get dns queries summary api
-	app.get("/api/queries/summary", api.querySummaryCall.bind(api));
-
-	//Get dns query type api
-	app.get("/api/queries/types", api.queryTypesCall.bind(api));
-
-	//Get dns query forward destination api
-	app.get("/api/queries/destinations", api.queryDestinationsCall.bind(api));
-
-	/*-----------[INTERNET]----------*/
-
-	//stub for internet api
-	app.get("/api/internet", api.internetRootCall.bind(api));
-
-	//Get current dsl info api
-	app.get("/api/internet/info", api.internetInfoCall.bind(api));
-
-	//Get (cached) speed api
-	app.get("/api/internet/speed", api.internetSpeedCall.bind(api));
-
-	//Get online monitor
-	app.get("/api/internet/monitor", api.internetMonitorCall.bind(api));
-
-	/*-----------[PHONE]----------*/
-
-	//stub for internet api
-	app.get("/api/phone", api.phoneRootCall.bind(api));
-
-	//Get call list api
-	app.get("/api/phone/list", api.phoneListCall.bind(api));
-
-	//Get active phone calls
-	app.get("/api/phone/active", api.phoneActiveCall.bind(api));
-
-	/*-----------[WLAN]----------*/
-
-	//stub for wlan api
-	app.get("/api/wlan", api.wlanRootCall.bind(api));
-
-	//Get current wlan info api
-	app.get("/api/wlan/info", api.wlanInfoCall.bind(api));
-
-	//Set wlan enabled
-	app.get("/api/wlan/:id/enable", api.wlanEnableCall.bind(api));
-
-	//Set wps mode
-	app.get("/api/wlan/:id/wps", api.wlanWpsCall.bind(api));
-
-	/*-----------[END>ROUTES]----------*/
-
-	app.listen(PORT, function () {
-		console.log(`FB-CP listening on Port ${PORT}`);
-	});
+	return app;
 }
+
+module.exports = {
+	main: main,
+	port: settings.getAppPort(),
+	settings: settings,
+};

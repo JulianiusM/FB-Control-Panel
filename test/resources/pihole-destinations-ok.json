@@ -1,0 +1,11 @@
+{
+    "forward_destinations": {
+        "blocked|blocked": 43.22,
+        "cached|cached": 7.13,
+        "other|other": 1.49,
+        "one.one.one.one#53|1.1.1.1#53": 19.48,
+        "one.one.one.one#53|2606:4700:4700::1111#53": 18.73,
+        "one.one.one.one#53|2606:4700:4700::1001#53": 9.8,
+        "one.one.one.one#53|1.0.0.1#53": 0.15
+    }
+}

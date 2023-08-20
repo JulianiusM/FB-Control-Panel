@@ -149,7 +149,7 @@ function refreshCallList() {
 }
 
 function initSocket() {
-	let port = 62391;
+	let port = config.callMonPort;
 	let socket = new WebSocket("ws://" + window.location.hostname + ":" + port);
 
 	socket.onopen = function () {

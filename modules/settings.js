@@ -27,6 +27,7 @@ module.exports = class Settings {
 
 		this.sessionSecret = "CHANGE__" + this.generateRandomString(20);
 		this.appPort = "3000";
+		this.callMonPort = "62342";
 
 		this.file = "./settings.csv";
 	}
@@ -172,12 +173,29 @@ module.exports = class Settings {
 		return this.appPort;
 	}
 
+	getCallMonitorPort() {
+		return this.callMonPort;
+	}
+
 	setSessionSecret(sessionSecret) {
 		this.sessionSecret = sessionSecret;
 	}
 
 	setAppPort(appPort) {
 		this.appPort = appPort;
+	}
+
+	setCallMonitorPort(callMonPort) {
+		this.callMonPort = callMonPort;
+	}
+
+	//----- File -----
+	getFile() {
+		return this.file;
+	}
+
+	setFile(file) {
+		this.file = file;
 	}
 
 	async readSettingsFile() {
@@ -260,6 +278,9 @@ module.exports = class Settings {
 						case "APP_PORT":
 							self.setAppPort(row[1]);
 							break;
+						case "CALLMONITOR_PORT":
+							self.setCallMonitorPort(row[1]);
+							break;
 						default:
 							console.log("Invalid row: " + row);
 							break; //Invalid setting; Ignore!
@@ -305,7 +326,9 @@ module.exports = class Settings {
 			"\nSESSION_SECRET," +
 			this.sessionSecret +
 			"\nAPP_PORT," +
-			this.appPort;
+			this.appPort +
+			"\nCALLMONITOR_PORT," +
+			this.callMonPort;
 		fs.writeFile(this.file, contents, "utf-8", function (error) {
 			if (error) {
 				console.log("Error writing settings file: " + error);

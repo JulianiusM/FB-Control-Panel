@@ -1,13 +1,13 @@
 {
     "name": "fb-control",
-    "version": "1.0.6",
+    "version": "1.0.7",
     "description": "A (Overview) Control Panel for Fritz!Box",
-    "main": "app.js",
+    "main": "server.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 0"
+        "test": "jest"
     },
     "author": "JundM100 Development",
-    "license": "ISC",
+    "license": "LGPL-3.0-or-later",
     "dependencies": {
         "bcrypt": "^5.1.0",
         "bootstrap": "^4.6.2",
@@ -16,7 +16,7 @@
         "express-session": "^1.17.3",
         "fritzbox.js": "^2.0.1",
         "fs": "0.0.1-security",
-        "got": "^12.6.0",
+        "got": "^13.0.0",
         "https": "^1.0.0",
         "iobroker.tr-064": "^4.2.18",
         "jquery": "^3.6.4",
@@ -29,9 +29,20 @@
         "qs": "^6.11.1",
         "querystring": "^0.2.1",
         "speedtest-net": "^2.2.0",
+        "supertest": "^6.3.3",
         "tr-064": "^0.2.0",
         "wifi-qr-code-generator": "^1.1.1",
         "ws": "^8.13.0",
         "xml2js": "^0.4.23"
+    },
+    "devDependencies": {
+        "@types/bcrypt": "^5.0.0",
+        "@types/express": "^4.17.17",
+        "@types/express-session": "^1.17.7",
+        "@types/mysql": "^2.15.21",
+        "@types/supertest": "^2.0.12",
+        "@types/ws": "^8.5.5",
+        "jest": "^29.6.2",
+        "nock": "^13.3.3"
     }
 }
