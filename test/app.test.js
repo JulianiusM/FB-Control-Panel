@@ -24,6 +24,13 @@ beforeAll(async () => {
 		.get("/pihole/api.php")
 		.query({ getForwardDestinations: "", auth: "GENERIC-TOKEN" })
 		.replyWithFile(200, "./test/resources/pihole-destinations-ok.json");
+	nock("http://speedtest.mock.local")
+		.get("/api")
+		.replyWithFile(200, "./test/resources/remote-speedtest-ok.json");
+});
+
+afterAll(async () => {
+	await appRef.tearDown();
 });
 
 describe("GET /", () => {

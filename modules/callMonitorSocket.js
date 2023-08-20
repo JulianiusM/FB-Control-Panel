@@ -75,6 +75,10 @@ module.exports = class CallMonitorSocket {
 		return this.calls.values();
 	}
 
+	async tearDown() {
+		//TODO
+	}
+
 	_saveActiveCall(call) {
 		this.calls.set(this._getCallMonitorDataKey(call), call);
 	}

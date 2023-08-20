@@ -1,0 +1,29 @@
+{
+	"timestamp": "2023-01-01T00:00:00.000Z",
+	"ping": { "jitter": 5.38, "latency": 16.946 },
+	"download": { "bandwidth": 10107246, "bytes": 129970080, "elapsed": 13304 },
+	"upload": { "bandwidth": 4706077, "bytes": 17451360, "elapsed": 3714 },
+	"packetLoss": 0,
+	"isp": "INVALID",
+	"interface": {
+		"internalIp": "123.456.789.012",
+		"name": "INVALID",
+		"macAddr": "00:00:00:00:00:00",
+		"isVpn": false,
+		"externalIp": "123.456.789.012"
+	},
+	"server": {
+		"id": 4404,
+		"name": "R-KOM GmbH & Co. KG",
+		"location": "Regensburg",
+		"country": "Germany",
+		"host": "speedtest.glasfaser-ostbayern.de",
+		"port": 8080,
+		"ip": "212.77.162.146"
+	},
+	"result": {
+		"id": "INVALID",
+		"url": "https://www.speedtest.net/result/c/INVALID"
+	},
+	"empty": false
+}

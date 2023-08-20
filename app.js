@@ -18,6 +18,7 @@ let apiRoute = require("./routes/api.js");
 
 //Top level variables
 let settings = new settingsRef();
+let clients = undefined;
 
 //Start the app
 async function main() {
@@ -39,16 +40,14 @@ async function main() {
 	});*/
 
 	//Initialize custom modules
-	var clients = new clientsRef(dbClient, bcrypt, renderer, settings);
-	var auth = new authRef(clients);
-	var api = new apiRef(clients);
+	clients = new clientsRef(dbClient, bcrypt, renderer, settings);
+	let auth = new authRef(clients);
+	let api = new apiRef(clients);
 
 	//Initialize body parser for post routes
 	let urlencodedParser = bodyParser.urlencoded({
 		extended: false,
 	});
-
-	const PORT = settings.getAppPort();
 
 	//Initialize express as app
 	let app = express();
@@ -118,8 +117,15 @@ async function main() {
 	return app;
 }
 
+async function tearDown() {
+	if (clients != undefined) {
+		await clients.tearDown();
+	}
+}
+
 module.exports = {
 	main: main,
+	tearDown: tearDown,
 	port: settings.getAppPort(),
 	settings: settings,
 };
