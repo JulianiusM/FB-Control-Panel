@@ -4,7 +4,7 @@
     "description": "A (Overview) Control Panel for Fritz!Box",
     "main": "server.js",
     "scripts": {
-        "test": "jest"
+        "test": "jest --coverage"
     },
     "author": "JundM100 Development",
     "license": "LGPL-3.0-or-later",
